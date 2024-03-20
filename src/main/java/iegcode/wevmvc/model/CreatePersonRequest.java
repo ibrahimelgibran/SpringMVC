@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -19,5 +21,9 @@ public class CreatePersonRequest {
 
     private String phone;
 
+    private CreateAddressRequest address;
 
+    private List<String> hobbies;
+
+    private List<CreateSocialMediasRequest> socialMedias;
 }

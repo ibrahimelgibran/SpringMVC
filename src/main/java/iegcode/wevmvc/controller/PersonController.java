@@ -16,12 +16,20 @@ public class PersonController {
     @ResponseBody
     @ResponseStatus(HttpStatus.OK)
     public String createPerson(@ModelAttribute CreatePersonRequest request){
+
+        System.out.println(request);
+
         return new StringBuilder().append("Success create person ")
                 .append(request.getFirstName()).append(" ")
                 .append(request.getMiddleName()).append(" ")
                 .append(request.getLastName()).append(" ")
                 .append("with email ").append(request.getEmail()).append(" ")
                 .append("and phone ").append(request.getPhone())
+                .append(" with address ")
+                .append(request.getAddress().getStreet()).append(", ")
+                .append(request.getAddress().getCity()).append(", ")
+                .append(request.getAddress().getCountry()).append(", ")
+                .append(request.getAddress().getPostalCode())
                 .toString();
     }
 }
