@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import iegcode.wevmvc.model.CreatePersonRequest;
 import iegcode.wevmvc.model.CreateSocialMediasRequest;
 
+import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -52,6 +53,29 @@ class PersonApiControllerTest {
         ).andExpectAll(
                 status().isOk(),
                 content().json(jsonRequest)
+        );
+    }
+
+    @Test
+    void createPersonValidationError() throws Exception{
+        CreatePersonRequest request = new CreatePersonRequest();
+        request.setMiddleName("El");
+        request.setLastName("Gibran");
+        request.setHobbies(List.of("Coding", "Reading", "Makan"));
+        request.setSocialMedias(new ArrayList<>());
+        request.getSocialMedias().add(new CreateSocialMediasRequest("facebook", "facebook.com/ibrhaimelgibran"));
+        request.getSocialMedias().add(new CreateSocialMediasRequest("instagram", "instagram.com/elgibran17"));
+
+        String jsonRequest = objectMapper.writeValueAsString(request);
+
+        mockMvc.perform(
+                post("/api/person")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON)
+                        .content(jsonRequest)
+        ).andExpectAll(
+                status().isBadRequest(),
+                content().string(Matchers.containsString("Validation Error"))
         );
     }
 }
