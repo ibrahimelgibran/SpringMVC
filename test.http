@@ -1,0 +1,25 @@
+POST http://localhost:8181/api/person
+Content-Type: application/json
+Accept: application/json
+
+{
+  "firstName": "I",
+  "middleName": "E",
+  "lastName": "G",
+  "email" : "iegcode@example.com",
+  "phone": "+01 0110100110",
+  "address": {
+    "street": "Azure",
+    "city": "NewYork",
+    "country": "US",
+    "postalCode": "11111"
+  },
+  "hobbies": ["I", "Love", "Coding"],
+  "socialMedias": [
+    {
+      "name": "github",
+      "location": "github.com/ibrhaimelgibran"
+    }
+  ]
+}
+
