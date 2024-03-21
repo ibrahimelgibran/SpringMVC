@@ -56,10 +56,11 @@ class PersonControllerTest {
         mockMvc.perform(
                 post("/person")
                         .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                        .param("firstName", "Ibrahim")
                         .param("middleName", "El")
                         .param("lastName", "Gibran")
-                        .param("email", "gibran@example.com")
-                        .param("phone", "085876076005")
+//                        .param("email", "gibran@example.com")
+//                        .param("phone", "085876076005")
                         .param("address.street", "Jalan belum jadi")
                         .param("address.city", "Yogyakarta")
                         .param("address.country", "Indonesia")
@@ -74,7 +75,7 @@ class PersonControllerTest {
 
         ).andExpectAll(
                 status().isBadRequest(),
-                content().string(Matchers.containsString("Validation Error"))
+                content().string(Matchers.containsString("You send invalid data"))
         );
     }
 }
