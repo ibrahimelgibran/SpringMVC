@@ -1,6 +1,5 @@
 package iegcode.wevmvc.controller;
 
-import iegcode.wevmvc.model.User;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,30 +12,22 @@ import static org.springframework.test.web.servlet.MockMvcBuilder.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.*;
+
 @SpringBootTest
 @AutoConfigureMockMvc
-class UserControllerTest {
+class PartnerControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
 
     @Test
-    public void getUser() throws Exception {
+    void getPartner() throws Exception {
         mockMvc.perform(
-                get("/user/current")
-                        .sessionAttr("user", new User("Gibran"))
+                get("/partner/current")
+                        .header("X-API-KEY", "SAMPLE")
         ).andExpectAll(
                 status().isOk(),
-                content().string(Matchers.containsString("Hello Gibran"))
-        );
-    }
-
-    @Test
-    public void getUserInvalid() throws Exception {
-        mockMvc.perform(
-                get("/user/current")
-        ).andExpectAll(
-                status().is3xxRedirection()
+                content().string(Matchers.containsString("SAMPLE : Sample Partner"))
         );
     }
 }

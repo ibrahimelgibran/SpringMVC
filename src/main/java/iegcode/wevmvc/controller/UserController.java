@@ -11,7 +11,9 @@ public class UserController {
 
     @GetMapping(path = "/user/current")
     @ResponseBody
-    public String getUser(@SessionAttribute(name = "user")User user){
+    public String getUser(@SessionAttribute(name = "user") User user){
         return "Hello " + user.getUsername();
     }
+
+
 }
